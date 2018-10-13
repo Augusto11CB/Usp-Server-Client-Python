@@ -1,22 +1,23 @@
 import socket
-from threading import Thread
-from SocketServer import ThreadingMixIn
+import threading
+from socketserver  import ThreadingMixIn
 
-TCP_IP = socket.gethostbyaddr("your-ec2-public_ip")[0]
-TCP_IP = socket.gethostbyaddr("127.0.0.1")
+#TCP_IP = socket.gethostbyaddr("your-ec2-public_ip")[0]
+# TCP_IP = socket.gethostbyaddr("127.0.0.1")
+TCP_IP = socket.gethostbyname("127.0.0.1")
 TCP_PORT = 2222
 BUFFER_SIZE = 1024
 
 print('TCP_IP = ',TCP_IP)
 print('TCP_PORT = ',TCP_PORT)
 
-class ClientThread(Thread):
+class ClientThread(threading.Thread):
 
     def __init__(self, ip, port, sock):
-        Thread.__init__(self):
-        self.ip = ip
+        threading.Thread.__init__(self)
         self.port = port
         self.sock = sock
+        self.ip = ip
         print("New Thread Started For IP: " + ip + " -- Port: " + str(port))
 
     def run (self):
@@ -54,3 +55,4 @@ for t in myThreads:
 
 
 
+ 
